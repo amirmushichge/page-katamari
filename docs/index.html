@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page Katamari — roll up the page</title>
+  <meta name="description" content="Turn a webpage into a playground. Try Page Katamari here, then download the open-source Chrome extension to play on your own sites.">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta property="og:title" content="Page Katamari — roll up the page">
+  <meta property="og:description" content="A ball that collects the words, buttons and images on a webpage. Play here or get the Chrome extension.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="assets/overlay.css">
+  <script src="assets/katamari.js" defer></script>
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <header class="masthead" data-pk-ignore>
+    <a class="wordmark" href="./" aria-label="Page Katamari home"><img src="assets/icon.svg" width="26" height="26" alt="">Page Katamari</a>
+    <nav aria-label="Project"><a href="#install">Get the extension <span aria-hidden="true">↗</span></a><a class="source-link" href="https://github.com/amirmushichge/page-katamari" target="_blank" rel="noreferrer" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .8a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.2.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.3.1 2 1.3 2 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.4 4.7 18.4 5 18.4 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.8 5.4-5.5 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.4 11.4 0 0 0 12 .8Z"/></svg><span>GitHub</span></a></nav>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div class="eyebrow">A browser experiment <span>01 / Play</span></div>
+      <h1 id="title">Roll up<br>this page.</h1>
+      <div class="intro-side"><p>Words, images, buttons.<br>They all look better on a ball.</p><p class="subcopy">Roll through the page and collect what you touch. Stop whenever you want to put it all back.</p></div>
+      <div class="launch" data-pk-ignore>
+        <button class="button primary" id="play" type="button">Play on this page <span aria-hidden="true">↗</span></button>
+        <span class="controls-hint" id="control-hint">Cursor or WASD to steer · Space to jump · Esc to stop</span>
+        <span id="game-status" class="sr-only" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section class="playground" aria-labelledby="playground-title">
+      <div class="section-line"><h2 id="playground-title">A few things to pick up</h2><span>Everything below is part of the playground</span></div>
+      <div class="play-grid">
+        <article class="tile orbital"><img src="assets/orbit.svg" alt="Black orbital sculpture with overlapping rings" width="600" height="460"><div class="caption"><span>Orbital study</span><span>001</span></div></article>
+        <article class="tile type-tile"><p class="small-label">Loose type</p><p class="giant-type">Aa</p><p>Letters with somewhere to go.</p><div class="loose-controls"><button type="button" class="collectible">Take me ↗</button><a class="collectible light" href="#install">And me ↗</a></div></article>
+        <article class="tile ripple"><img src="assets/ripple.svg" alt="Concentric black rings bending around an open centre" width="600" height="460"><div class="caption"><span>Ripple effect</span><span>002</span></div></article>
+        <article class="tile notes"><p class="small-label">Notes from the page</p><h3>Nothing stays<br>in place for long.</h3><p>This headline. That image. The little button you were about to click. A website has plenty of things worth collecting.</p><div class="word-pile"><span>Drag</span><span>Roll</span><span>Collect</span><span>Repeat</span></div></article>
+      </div>
+      <div class="ticker" aria-label="More words to collect"><span>One more word.</span><span>One more button.</span><span>A slightly bigger ball.</span></div>
+    </section>
+
+    <section class="install" id="install" aria-labelledby="install-title" data-pk-ignore>
+      <div class="section-line"><span>02 / Take it with you</span><span>Desktop Chrome · v1.9.0 preview</span></div>
+      <div class="install-grid">
+        <div><h2 id="install-title">Your next tab<br>is a playground.</h2><p>Download the extension to play over a website you already have open. It runs when you start it, on that tab.</p><a class="button primary" id="download" href="downloads/page-katamari-v1.9.0.zip" download>Download extension <span aria-hidden="true">↓</span></a><p class="download-note">Free · Open source · Manual installation</p></div>
+        <ol class="steps">
+          <li><span>01</span><div><h3>Unzip the download</h3><p>Keep the <code>page-katamari</code> folder somewhere permanent.</p></div></li>
+          <li><span>02</span><div><h3>Open Chrome’s extensions page</h3><div class="copy-row"><code>chrome://extensions</code><button id="copy-url" type="button" aria-label="Copy Chrome extensions address">Copy</button></div><p>Paste this address into a new tab and turn on <strong>Developer mode</strong>.</p></div></li>
+          <li><span>03</span><div><h3>Load the folder</h3><p>Click <strong>Load unpacked</strong> and select the unzipped <code>page-katamari</code> folder.</p></div></li>
+          <li><span>04</span><div><h3>Open a website and start collecting</h3><p>Pin Page Katamari from Chrome’s Extensions menu. Click its icon, then <strong>Start collecting</strong>. Use the on-page × or Esc to restore the page.</p></div></li>
+        </ol>
+      </div>
+      <details><summary>Compatibility and privacy <span aria-hidden="true">+</span></summary><div class="details-body"><p>This is an experimental desktop Chrome extension. It cannot run on protected browser pages, the Chrome Web Store or the built-in PDF viewer. Embedded frames, shadow DOM and complex live applications may have limits. Reload the tab if a site does not recover as expected.</p><p>The extension asks for access to the active tab when you invoke it. It has no account, analytics or upload service. Images and other assets already on a page may still be loaded by the browser. This public demo contains only local project assets.</p><p>On a phone, you can drag to steer in this demo. Installing the extension requires desktop Chrome.</p></div></details>
+    </section>
+  </main>
+
+  <footer data-pk-ignore><div><a href="https://amirmushich.com" target="_blank" rel="noreferrer">Amir Mušić ↗</a><p>Original prototype by Alex. Inspired by <a href="https://x.com/measure_plan/status/2106500440380600626" target="_blank" rel="noreferrer">@measure_plan’s Weball ↗</a></p></div><div class="footer-links"><a href="https://github.com/amirmushichge/page-katamari" target="_blank" rel="noreferrer">Source code ↗</a><a href="https://github.com/amirmushichge/page-katamari/issues" target="_blank" rel="noreferrer">Report an issue ↗</a></div></footer>
+  <noscript><p class="noscript" data-pk-ignore>JavaScript is needed to play the demo. You can still download the extension using the link above.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "PK Manrope";
+  src: url("assets/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  font-family: "PK Manrope", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 320px;
+  margin: 0;
+  color: #101010;
+  background:
+    radial-gradient(circle at 1px 1px, #d8d8d8 1px, transparent 1.1px) 0 0 / 18px 18px,
+    #f7f7f5;
+}
+
+main { padding: 18px; }
+
+header {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #111;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 14%);
+  font-size: 17px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #6c6c69;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+button {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border: 1px solid #111;
+  border-radius: 16px;
+  color: #fff;
+  background: #111;
+  font: 650 15px/1 "PK Manrope", sans-serif;
+  letter-spacing: -0.04em;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+button:hover { transform: translateY(-1px); }
+button:active { transform: translateY(0) scale(.99); }
+button.is-active { color: #111; background: #fff; }
+.arrow { font-size: 20px; font-weight: 400; }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: #777773;
+  font-size: 11px;
+}
+
+.controls div { display: flex; gap: 3px; }
+
+kbd {
+  display: grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 1px solid #dadad6;
+  border-bottom-color: #b9b9b4;
+  border-radius: 5px;
+  color: #222;
+  background: #fff;
+  box-shadow: 0 1px 0 #cfcfca;
+  font: 600 9px/1 "PK Manrope", sans-serif;
+}
+
+#message {
+  min-height: 14px;
+  margin: 14px 0 0;
+  color: #8a8a86;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+#message.is-error { color: #a22; }

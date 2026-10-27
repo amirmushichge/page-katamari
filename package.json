@@ -1,0 +1,12 @@
+{
+  "name": "page-katamari",
+  "version": "1.9.0",
+  "private": true,
+  "description": "A local webpage playground and Chrome extension",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

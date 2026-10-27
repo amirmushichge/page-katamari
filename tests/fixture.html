@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Page Katamari browser regressions</title>
+<link rel="stylesheet" href="../extension/overlay.css"><style>body{font:18px Arial;margin:70px;background:#f5f4ee}#fixture{max-width:800px}img{display:block;width:260px;height:180px}#tools{position:fixed;right:8px;top:8px;z-index:2147483647;background:white;padding:10px}pre{white-space:pre-wrap;font:12px monospace;max-height:300px;overflow:auto;max-width:570px}button{font:inherit;padding:8px 14px}</style>
+<main id="fixture"><h1>Words that should come back.</h1><p id="copy">Roll through this local page and collect the text.</p><button id="original-button" style="opacity:.9;transform:translateX(1px)">Keep my event handler</button><a href="#fixture">Keep my link</a><img src="../docs/assets/orbit.svg" alt="Local artwork"><input value="Keep my value" aria-label="Retained input"><p id="live">Original live text</p><p id="retained">Original retained text</p><div id="dynamic"></div></main>
+<aside id="tools" data-pk-ignore><button id="run" type="button">Run browser regressions</button><pre id="output">Ready</pre></aside>
+<script>window.fixtureClicks=0;document.querySelector('#original-button').addEventListener('click',()=>window.fixtureClicks++);</script>
+<script src="../extension/content.js"></script><script src="browser.js"></script></html>

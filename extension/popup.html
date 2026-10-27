@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page Katamari</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark" aria-hidden="true">●</div>
+        <div>
+          <h1>Page Katamari</h1>
+          <p>Turn this page into a playground</p>
+        </div>
+      </header>
+
+      <button id="toggle" type="button">
+        <span id="toggle-label">Start collecting</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </button>
+
+      <div class="controls">
+        <span>Steer</span>
+        <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div>
+        <span>or move the cursor</span>
+      </div>
+
+      <p id="message" role="status">Checking this tab…</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
