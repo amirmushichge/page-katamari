@@ -30,7 +30,9 @@ async function ensureContentScript() {
   if (isRestrictedUrl(tab.url)) throw new Error("Restricted page");
 
   try {
-    return await chrome.tabs.sendMessage(tab.id, { type: "PK_STATUS" });
+    const status = await chrome.tabs.sendMessage(tab.id, { type: "PK_STATUS" });
+    if (typeof status?.active !== "boolean") throw new Error("No content script response");
+    return status;
   } catch {
     await chrome.scripting.insertCSS({
       target: { tabId: tab.id },

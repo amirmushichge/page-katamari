@@ -3,7 +3,8 @@ async function sendToActiveTab(message) {
   if (!tab?.id) return;
 
   try {
-    await chrome.tabs.sendMessage(tab.id, message);
+    const status = await chrome.tabs.sendMessage(tab.id, { type: "PK_STATUS" });
+    if (typeof status?.active !== "boolean") throw new Error("No content script response");
   } catch (error) {
     try {
       await chrome.scripting.insertCSS({
@@ -14,11 +15,16 @@ async function sendToActiveTab(message) {
         target: { tabId: tab.id },
         files: ["content.js"]
       });
-      await chrome.tabs.sendMessage(tab.id, message);
     } catch (injectionError) {
       // Restricted browser pages intentionally reject content scripts.
       console.debug("Page Katamari is unavailable on this page", injectionError || error);
+      return;
     }
+  }
+  try {
+    await chrome.tabs.sendMessage(tab.id, message);
+  } catch (error) {
+    console.debug("Page Katamari is unavailable on this page", error);
   }
 }
 
