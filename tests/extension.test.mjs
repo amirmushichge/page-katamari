@@ -4,13 +4,13 @@ import vm from 'node:vm';
 const source=readFileSync(new URL('../extension/popup.js',import.meta.url),'utf8');
 const background=readFileSync(new URL('../extension/background.js',import.meta.url),'utf8');
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
-function setup({url='https://example.com',installed=true,blocked=false}={}){
+function setup({url='https://example.com',installed=true,blocked=false,emptyWithoutReceiver=false}={}){
   let active=false;const calls=[];
   const elements=Object.fromEntries(['#toggle','#toggle-label','#message'].map(id=>[id,{textContent:'',disabled:false,listeners:{},classList:{toggle(){},remove(){},add(){}},addEventListener(type,fn){this.listeners[type]=fn;}}]));
-  const chrome={tabs:{query:async()=>[{id:7,url}],sendMessage:async(id,message)=>{calls.push(['message',id,message.type]);if(!installed)throw Error('No receiver');if(message.type==='PK_TOGGLE')active=!active;return {active};}},scripting:{insertCSS:async args=>{calls.push(['css',args]);if(blocked)throw Error('Blocked');},executeScript:async args=>{calls.push(['script',args]);installed=true;}},commands:{onCommand:{addListener(fn){chrome.command=fn;}}}};
+  const chrome={tabs:{query:async()=>[{id:7,url}],sendMessage:async(id,message)=>{calls.push(['message',id,message.type]);if(!installed){if(emptyWithoutReceiver)return undefined;throw Error('No receiver');}if(message.type==='PK_TOGGLE')active=!active;return {active};}},scripting:{insertCSS:async args=>{calls.push(['css',args]);if(blocked)throw Error('Blocked');},executeScript:async args=>{calls.push(['script',args]);installed=true;}},commands:{onCommand:{addListener(fn){chrome.command=fn;}}}};
   const context={chrome,document:{querySelector:id=>elements[id]},console:{debug(){}}};
   vm.runInNewContext(source,context);
-  return {elements,calls,chrome};
+  return {elements,calls,chrome,removeReceiver(){installed=false;}};
 }
 {
   const t=setup();await settle();assert.equal(t.elements['#toggle-label'].textContent,'Start collecting');
@@ -22,6 +22,15 @@ function setup({url='https://example.com',installed=true,blocked=false}={}){
   const t=setup({installed:false});await settle();
   assert.equal(t.calls.filter(x=>x[0]==='css').length,1);assert.equal(t.calls.filter(x=>x[0]==='script').length,1);
   await t.elements['#toggle'].listeners.click();assert.equal(t.elements['#toggle-label'].textContent,'Stop and restore page');
+}
+{
+  const t=setup({installed:false,emptyWithoutReceiver:true});await settle();
+  assert.equal(t.calls.filter(x=>x[0]==='script').length,1);
+  await t.elements['#toggle'].listeners.click();assert.equal(t.elements['#toggle-label'].textContent,'Stop and restore page');
+  t.removeReceiver();t.calls.length=0;
+  vm.runInNewContext(background,{chrome:t.chrome,console:{debug(){}}});
+  t.chrome.command('toggle-katamari');await settle();await settle();
+  assert.deepEqual(t.calls.map(x=>x[0]==='message'?x[2]:x[0]),['PK_STATUS','css','script','PK_TOGGLE']);
 }
 {
   const t=setup({url:'chrome://extensions'});await settle();assert.equal(t.elements['#toggle'].disabled,true);assert.equal(t.calls.length,0);
